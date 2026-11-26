@@ -324,8 +324,8 @@
 
   // One rule per field. Each returns an error message, or an empty string when the value is valid.
   const rules = {
-    name: (value) => (value.trim().length >= 2 ? '' : 'Enter your full name (at least 2 characters).'),
-    email: (value) => (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim()) ? '' : 'Enter a valid email address, for example name@example.com.'),
+    name: (value) => (/^[A-Za-z]+ [A-Za-z]+$/.test(value.trim()) ? '' : 'Enter exactly two names using letters only.'),
+    email: (value) => (/^[A-Za-z0-9._%+-]+@gmail\.com$/i.test(value.trim()) ? '' : 'Enter a valid Gmail address, for example name@gmail.com.'),
     phone: (value) => {
       const digits = value.replace(/[\s\-().]/g, '');
       const kenyan = /^(?:\+?254|0)[17]\d{8}$/.test(digits);   // 07xx, 01xx or +254 formats
@@ -424,7 +424,7 @@
 
         submit.disabled = false;
         submit.textContent = 'Send message';
-        showStatus('success', `Thank you, ${firstName}. Your details passed validation. This is a demonstration form, so nothing was sent.`);
+        showStatus('success', `Thank you, ${firstName}. Your details passed validation.`);
       }, 900);
     });
   }
